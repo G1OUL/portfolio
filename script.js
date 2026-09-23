@@ -92,3 +92,11 @@ if(!prefersReduced){
    hero.addEventListener("pointerleave",()=>{hero.style.transform="";hero.querySelectorAll(".land-layer").forEach(l=>l.style.translate="");});
  }
 }
+
+const fullHero=document.querySelector(".full-bg-hero");
+if(fullHero && !prefersReduced){
+  window.addEventListener("pointermove",e=>{
+    const x=(e.clientX/window.innerWidth-.5)*10, y=(e.clientY/window.innerHeight-.5)*6;
+    fullHero.style.transform="scale(1.04) translate3d("+x+"px,"+y+"px,0)";
+  },{passive:true});
+}
