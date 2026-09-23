@@ -78,3 +78,17 @@ if(!prefersReduced){
     landscape.addEventListener("pointerleave",()=>{landscape.style.transform="";landscape.querySelectorAll(".landscape-mountain,.landscape-lake,.landscape-branch").forEach(el=>el.style.translate="");});
   }
 }
+
+/* cinematic camera */
+if(!prefersReduced){
+ const hero=document.querySelector(".cinematic-hero");
+ if(hero){
+   hero.addEventListener("pointermove",e=>{
+     const r=hero.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
+     hero.style.transform="perspective(1500px) rotateY("+(x*3)+"deg) rotateX("+(-y*2)+"deg)";
+     const layers=hero.querySelectorAll(".land-layer");
+     layers.forEach((layer,i)=>{const depth=(i%7+1)*0.8;layer.style.translate=(x*depth)+"px "+(y*depth)+"px";});
+   });
+   hero.addEventListener("pointerleave",()=>{hero.style.transform="";hero.querySelectorAll(".land-layer").forEach(l=>l.style.translate="");});
+ }
+}
