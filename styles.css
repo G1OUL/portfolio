@@ -64,3 +64,13 @@ main{position:relative}.hero{max-width:var(--max);min-height:100dvh;margin:auto;
 @media(max-width:900px){.cinematic-hero{height:510px!important}.sun-layer{left:8%!important}.branch-a{width:105%}}
 @media(max-width:600px){.cinematic-hero{height:430px!important;border-radius:18px}.mountain-near{bottom:25%!important}.lake-layer{height:27%}.scene-caption{width:90%}}
 @media(prefers-reduced-motion:reduce){.cinematic-hero .land-layer,.cinematic-hero .petal-depth:before{animation:none!important}}
+
+/* FULL-BLEED REAL IMAGE HERO */
+.full-bg-hero{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;min-height:100vh!important;border-radius:0!important;z-index:0!important;overflow:hidden!important;background-image:url('/portfolio-hero.png');background-size:cover;background-position:center center;background-repeat:no-repeat;transform:none!important;box-shadow:none!important}
+.full-bg-hero:before{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,16,.72) 0%,rgba(5,7,16,.4) 38%,rgba(5,7,16,.08) 72%),linear-gradient(0deg,rgba(3,5,12,.5),transparent 38%,rgba(3,5,12,.12));z-index:1}
+.full-bg-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(9,10,22,.2),transparent 35%,rgba(8,8,18,.3));z-index:2}
+.hero{position:relative;min-height:100vh;overflow:hidden}
+.hero .container,.hero-content{position:relative;z-index:10}
+.full-bg-hero + *{position:relative;z-index:10}
+@media(max-width:700px){.full-bg-hero{background-position:58% center}.full-bg-hero:before{background:linear-gradient(90deg,rgba(5,7,16,.8),rgba(5,7,16,.3))}}
+@media(prefers-reduced-motion:reduce){.full-bg-hero{background-attachment:scroll}}
