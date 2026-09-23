@@ -3,7 +3,7 @@ const petalBox=document.getElementById("petals");
 const glow=document.getElementById("cursorGlow");
 
 if(!prefersReduced){
-  for(let i=0;i<30;i++){
+  for(let i=0;i<42;i++){
     const p=document.createElement("span");
     p.style.left=(Math.random()*100)+"vw";
     p.style.animationDuration=(8+Math.random()*11)+"s";
@@ -59,3 +59,22 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(target){e.preventDefault();target.scrollIntoView({behavior:prefersReduced?"auto":"smooth",block:"start"});}
   });
 });
+
+/* cinematic landscape parallax */
+if(!prefersReduced){
+  const landscape=document.querySelector(".live-landscape");
+  if(landscape){
+    window.addEventListener("pointermove",e=>{
+      const x=(e.clientX/window.innerWidth-.5);
+      const y=(e.clientY/window.innerHeight-.5);
+      landscape.style.setProperty("--mx",(x*12).toFixed(2)+"px");
+      landscape.style.setProperty("--my",(y*8).toFixed(2)+"px");
+      landscape.style.transform="perspective(1200px) rotateY("+(x*2.2)+"deg) rotateX("+(-y*1.6)+"deg)";
+      landscape.querySelectorAll(".landscape-mountain,.landscape-lake,.landscape-branch").forEach((el,i)=>{
+        const d=(i+1)*0.7;
+        el.style.translate=(x*d)+"px "+(y*d)+"px";
+      });
+    },{passive:true});
+    landscape.addEventListener("pointerleave",()=>{landscape.style.transform="";landscape.querySelectorAll(".landscape-mountain,.landscape-lake,.landscape-branch").forEach(el=>el.style.translate="");});
+  }
+}
