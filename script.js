@@ -155,3 +155,44 @@ if(exactVideo){
     else exactVideo.play().catch(()=>{});
   });
 }
+
+/* Character-by-character React-equivalent animation */
+(function(){
+  const heading=document.querySelector('.animated-heading');
+  const sub=document.querySelector('.exact-subheading');
+  const buttons=document.querySelector('.exact-buttons');
+  if(!heading||!sub||!buttons)return;
+  const text='Shaping tomorrow\nwith vision and action.';
+  const lines=text.split('\n');
+  const initialDelay=200,charDelay=30;
+  heading.innerHTML='';
+  lines.forEach((line,lineIndex)=>{
+    const lineWrap=document.createElement('span');
+    lineWrap.className='block';
+    [...line].forEach((char,charIndex)=>{
+      const span=document.createElement('span');
+      span.className='char';
+      span.textContent=char===' '?'\u00A0':char;
+      const delay=initialDelay+(lineIndex*line.length*charDelay)+(charIndex*charDelay);
+      span.dataset.delay=String(delay);
+      lineWrap.appendChild(span);
+      window.setTimeout(()=>span.classList.add('is-visible'),delay);
+    });
+    heading.appendChild(lineWrap);
+  });
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+    heading.querySelectorAll('.char').forEach(s=>s.classList.add('is-visible'));
+    sub.classList.add('is-visible');buttons.classList.add('is-visible');
+  }else{
+    window.setTimeout(()=>sub.classList.add('is-visible'),800);
+    window.setTimeout(()=>buttons.classList.add('is-visible'),1200);
+  }
+})();
+const exactVideo=document.querySelector('.exact-hero-video');
+if(exactVideo){
+  exactVideo.play().catch(()=>{});
+  document.addEventListener('visibilitychange',()=>{
+    if(document.hidden) exactVideo.pause();
+    else exactVideo.play().catch(()=>{});
+  });
+}
