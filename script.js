@@ -100,3 +100,13 @@ if(fullHero && !prefersReduced){
     fullHero.style.transform="scale(1.04) translate3d("+x+"px,"+y+"px,0)";
   },{passive:true});
 }
+
+/* Cinematic video: keep playback resilient and add only subtle camera scale */
+const heroVideo=document.querySelector(".hero-video");
+if(heroVideo){
+  heroVideo.play().catch(()=>{});
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden) heroVideo.pause();
+    else heroVideo.play().catch(()=>{});
+  });
+}
