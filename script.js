@@ -110,3 +110,48 @@ if(heroVideo){
     else heroVideo.play().catch(()=>{});
   });
 }
+
+/* Exact requested character-by-character heading animation */
+(function(){
+  const heading=document.querySelector(".animated-heading");
+  const sub=document.querySelector(".exact-subheading");
+  const buttons=document.querySelector(".exact-buttons");
+  if(!heading) return;
+  const lines=["Shaping tomorrow","with vision and action."];
+  const charDelay=30;
+  const initialDelay=200;
+  heading.innerHTML="";
+  let globalIndex=0;
+  lines.forEach((line,lineIndex)=>{
+    const lineEl=document.createElement("span");
+    lineEl.className="heading-line";
+    [...line].forEach((char,charIndex)=>{
+      const span=document.createElement("span");
+      span.className="char";
+      span.textContent=char===" " ? "\u00A0" : char;
+      const delay=initialDelay + (lineIndex*line.length*charDelay) + (charIndex*charDelay);
+      span.style.transitionDelay=delay+"ms";
+      lineEl.appendChild(span);
+      globalIndex++;
+    });
+    heading.appendChild(lineEl);
+    if(lineIndex===0) heading.appendChild(document.createElement("br"));
+  });
+  const reduced=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if(reduced){
+    heading.querySelectorAll(".char").forEach(s=>s.classList.add("is-visible"));
+    sub.classList.add("is-visible");buttons.classList.add("is-visible");
+    return;
+  }
+  requestAnimationFrame(()=>heading.querySelectorAll(".char").forEach(s=>s.classList.add("is-visible")));
+  setTimeout(()=>sub.classList.add("is-visible"),800);
+  setTimeout(()=>buttons.classList.add("is-visible"),1200);
+})();
+const exactVideo=document.querySelector(".exact-hero-video");
+if(exactVideo){
+  exactVideo.play().catch(()=>{});
+  document.addEventListener("visibilitychange",()=>{
+    if(document.hidden) exactVideo.pause();
+    else exactVideo.play().catch(()=>{});
+  });
+}
