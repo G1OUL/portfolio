@@ -76,3 +76,7 @@ body::selection{background:rgba(255,255,255,.25)}
   #animatedHeading .heading-line{white-space:normal}
   .hero-tag{white-space:normal}
 }
+
+/* Clean hero: video only */
+.hero-clean-layer{position:absolute;inset:0;z-index:1;pointer-events:none}
+.hero-footer,.hero-content{display:none!important}
