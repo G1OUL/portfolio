@@ -1,51 +1,223 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="Hariom Upadhyay — Data, AI and creative technology portfolio.">
 <title>Hariom Upadhyay — Flow</title>
 <style>
-html,body{margin:0;padding:0;background:#000;color:#dfffee;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-body{overflow-x:hidden}#scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
+/* ===== THEME TOKENS ===== */
+:root{
+  --bg:#050a08; --bg2:#0a1612; --fg:#eafff4; --muted:#8ca99c; --soft:#5d7a6e;
+  --accent:#34e89a; --accent2:#7affbf; --card:rgba(6,22,16,.72); --border:rgba(122,255,191,.16);
+  --nav-bg:rgba(6,22,16,.55); --shadow:0 20px 80px rgba(0,0,0,.6);
+  --glow:0 0 50px rgba(10,255,127,.13);
+  --tag-bg:rgba(6,22,16,.5); --tag-border:rgba(122,255,191,.2);
+  --project-bg:rgba(6,22,16,.55); --project-hover:rgba(10,38,25,.65);
+  --link:rgba(122,255,191,.7);
+}
+html[data-theme="light"]{
+  --bg:#f4f8f6; --bg2:#e8f0ec; --fg:#0a1612; --muted:#4a6358; --soft:#6b8a7c;
+  --accent:#0a9d5e; --accent2:#1ab374; --card:rgba(255,255,255,.78); --border:rgba(10,157,94,.18);
+  --nav-bg:rgba(255,255,255,.72); --shadow:0 12px 50px rgba(10,40,25,.1);
+  --glow:0 0 50px rgba(10,157,94,.08);
+  --tag-bg:rgba(255,255,255,.6); --tag-border:rgba(10,157,94,.2);
+  --project-bg:rgba(255,255,255,.6); --project-hover:rgba(240,248,245,.85);
+  --link:rgba(10,157,94,.8);
+}
+
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;overflow-x:hidden;transition:background .5s ease,color .5s ease}
+
+#scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0;transition:opacity .5s ease}
 #scroll-host{height:820vh;position:relative;z-index:1;pointer-events:none}
-#scroll-hint{position:fixed;z-index:5;left:50%;bottom:24px;transform:translateX(-50%);font:500 11px/1.2 system-ui;letter-spacing:.28em;text-transform:uppercase;color:#7affbf88;transition:opacity .4s}
+#scroll-hint{position:fixed;z-index:5;left:50%;bottom:24px;transform:translateX(-50%);font:500 11px/1.2 system-ui;letter-spacing:.28em;text-transform:uppercase;color:var(--soft);transition:opacity .4s}
+
 #ui{position:fixed;inset:0;z-index:4;pointer-events:none}
-nav{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;box-sizing:border-box;padding:14px 18px;border:1px solid #7affbf1c;border-radius:18px;background:#02160c44;backdrop-filter:blur(16px);box-shadow:0 10px 50px #0008}
-.brand{font-weight:700;letter-spacing:.16em;color:#eafff4}.brand span{color:#34e89a}
-.links{display:flex;gap:24px}.links a{color:#c7ead9;text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.links a:hover{color:#34e89a}.hero-copy{position:absolute;left:7vw;top:29vh;max-width:700px}.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#7affbf;margin-bottom:18px}
-h1{font-size:clamp(48px,9vw,118px);line-height:.9;letter-spacing:-.065em;margin:0;color:#effff7;text-shadow:0 0 50px #0aff7f22}h1 em{font-style:normal;color:#34e89a}
-.hero-copy p{max-width:560px;font-size:clamp(16px,2vw,22px);line-height:1.55;color:#c2dfd0;margin:28px 0}
-.ctas{display:flex;gap:12px}.cta{pointer-events:auto;padding:13px 18px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.1em;text-transform:uppercase}.primary{background:#34e89a;color:#00190d}.secondary{border:1px solid #7affbf44;background:#02160c66;color:#dfffee}
-.panel{position:absolute;left:7vw;right:7vw;min-height:60vh;display:flex;align-items:center;opacity:0;transform:translateY(30px);transition:.6s ease;pointer-events:none}.panel.visible{opacity:1;transform:none}
-.panel-card{max-width:760px;padding:32px;border:1px solid #7affbf22;border-radius:28px;background:#02160c7d;backdrop-filter:blur(18px);box-shadow:0 25px 90px #0008}
-.panel h2{font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing:-.05em;margin:0 0 20px}.panel h2 em{color:#34e89a;font-style:normal}.panel p{font-size:17px;line-height:1.7;color:#b8d7c7}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.tag{border:1px solid #7affbf26;padding:8px 11px;border-radius:999px;color:#9ee8c4;font-size:11px;letter-spacing:.08em}
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:25px}.project{border:1px solid #7affbf20;border-radius:18px;padding:18px;background:#031b1088}.project b{color:#7affbf;font-size:11px;letter-spacing:.15em}.project h3{margin:9px 0 6px}.project p{margin:0;font-size:13px;line-height:1.5}
-footer{position:absolute;bottom:24px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:#7fae9b;font-size:11px;letter-spacing:.08em}
-@media(max-width:700px){.links{display:none}.hero-copy{left:7vw;right:7vw;top:25vh}.panel{left:5vw;right:5vw}.panel-card{padding:22px}.projects{grid-template-columns:1fr}footer{left:5vw;right:5vw}}
-.workflow-line{margin:0 0 22px;color:#9ee8c4;font-size:13px;letter-spacing:.08em}.workflow-line span{color:#34e89a;font-weight:700}.project{transition:transform .35s ease,border-color .35s ease,background .35s ease}.project:hover{transform:translateY(-5px);border-color:#34e89a55;background:#062619aa}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}@media(max-width:700px){.workflow-line{line-height:2}}\n.about-grid,.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.about-grid div,.focus-grid div{display:flex;flex-direction:column;gap:7px;padding:18px;border:1px solid #7affbf18;border-radius:16px;background:#031b1066}.about-grid b,.focus-grid b{font-size:10px;color:#34e89a;letter-spacing:.14em}.about-grid strong,.focus-grid strong{font-size:20px}.about-grid span,.focus-grid span{font-size:12px;line-height:1.5;color:#9fc7b3}.skill-groups{display:grid;gap:18px;margin-top:28px}.skill-group>b{font-size:10px;letter-spacing:.15em;color:#7affbf}.workflow{display:grid;gap:10px;margin-top:25px}.workflow div{display:grid;grid-template-columns:45px 150px 1fr;gap:15px;align-items:center;padding:14px 16px;border:1px solid #7affbf18;border-radius:14px;background:#031b1066}.workflow span{color:#34e89a;font-weight:700}.workflow strong{font-size:14px}.workflow p{margin:0;font-size:12px;color:#9fc7b3}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}.project{transition:.3s ease}.project:hover{transform:translateY(-4px);border-color:#34e89a55}.links a{transition:.2s}.links a:hover{color:#34e89a}.panel-card{width:100%;box-sizing:border-box}@media(max-width:700px){.about-grid,.focus-grid{grid-template-columns:1fr}.workflow div{grid-template-columns:35px 1fr}.workflow p{grid-column:2}.links{display:none}}\n</style>
+
+/* ===== NAV ===== */
+nav{
+  position:absolute;top:20px;left:50%;transform:translateX(-50%);
+  width:min(1120px,calc(100% - 32px));
+  display:flex;align-items:center;justify-content:space-between;
+  padding:13px 18px;border:1px solid var(--border);border-radius:16px;
+  background:var(--nav-bg);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);
+  box-shadow:var(--shadow);
+}
+.brand{font-weight:700;letter-spacing:.16em;color:var(--fg);font-size:15px}
+.brand span{color:var(--accent)}
+.links{display:flex;gap:22px}
+.links a{color:var(--muted);text-decoration:none;font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:color .2s}
+.links a:hover{color:var(--accent)}
+.nav-right{display:flex;align-items:center;gap:14px}
+.cta-secondary{
+  pointer-events:auto;padding:9px 16px;border-radius:999px;text-decoration:none;
+  font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  border:1px solid var(--border);background:var(--card);color:var(--fg);
+  transition:.25s ease;
+}
+.cta-secondary:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ===== THEME TOGGLE ===== */
+.theme-toggle{
+  pointer-events:auto;display:flex;align-items:center;gap:6px;cursor:pointer;
+  background:var(--card);border:1px solid var(--border);border-radius:999px;
+  padding:6px 10px;transition:.25s ease;
+}
+.theme-toggle:hover{border-color:var(--accent)}
+.theme-toggle .icon{font-size:14px;line-height:1}
+.theme-toggle .track{
+  width:34px;height:18px;border-radius:999px;background:var(--bg2);
+  border:1px solid var(--border);position:relative;transition:.3s ease;
+}
+.theme-toggle .thumb{
+  position:absolute;top:1px;left:1px;width:14px;height:14px;border-radius:50%;
+  background:var(--accent);transition:.3s cubic-bezier(.4,0,.2,1);
+}
+html[data-theme="light"] .theme-toggle .thumb{left:calc(100% - 15px)}
+
+/* ===== HERO ===== */
+.hero-copy{position:absolute;left:7vw;top:28vh;max-width:700px}
+.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--accent2);margin-bottom:18px}
+h1{font-size:clamp(44px,8.5vw,108px);line-height:.92;letter-spacing:-.06em;color:var(--fg);text-shadow:var(--glow)}
+h1 em{font-style:normal;color:var(--accent)}
+.hero-copy p{max-width:560px;font-size:clamp(15px,2vw,20px);line-height:1.55;color:var(--muted);margin:26px 0}
+.ctas{display:flex;gap:12px;flex-wrap:wrap}
+.cta{pointer-events:auto;padding:13px 18px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.1em;text-transform:uppercase;transition:.25s ease}
+.primary{background:var(--accent);color:#00190d;font-weight:600}
+.primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(52,232,154,.3)}
+
+/* ===== PANELS ===== */
+.panel{position:absolute;left:7vw;right:7vw;min-height:60vh;display:flex;align-items:center;opacity:0;transform:translateY(30px);transition:.6s ease;pointer-events:none}
+.panel.visible{opacity:1;transform:none;pointer-events:auto}
+.panel-card{
+  max-width:760px;padding:32px;border:1px solid var(--border);border-radius:24px;
+  background:var(--card);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);
+  box-shadow:var(--shadow);width:100%;
+}
+.panel h2{font-size:clamp(34px,5.5vw,68px);line-height:.96;letter-spacing:-.05em;margin:0 0 18px}
+.panel h2 em{color:var(--accent);font-style:normal}
+.panel p{font-size:16px;line-height:1.7;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:22px}
+.tag{border:1px solid var(--tag-border);padding:7px 11px;border-radius:999px;color:var(--accent2);font-size:11px;letter-spacing:.08em;background:var(--tag-bg)}
+
+/* ===== PROJECTS ===== */
+.projects{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:24px}
+.project{
+  border:1px solid var(--border);border-radius:16px;padding:18px;
+  background:var(--project-bg);transition:.35s ease;
+}
+.project:hover{transform:translateY(-5px);border-color:var(--accent);background:var(--project-hover)}
+.project b{color:var(--accent2);font-size:11px;letter-spacing:.14em}
+.project h3{margin:9px 0 6px;font-size:18px;font-weight:600}
+.project p{margin:0;font-size:13px;line-height:1.5}
+.project a{display:inline-block;margin-top:12px;color:var(--link);text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}
+
+/* ===== FOOTER ===== */
+footer{position:absolute;bottom:24px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:var(--soft);font-size:11px;letter-spacing:.08em}
+
+/* ===== MOBILE ===== */
+@media(max-width:700px){
+  .links{display:none}
+  .hero-copy{left:7vw;right:7vw;top:24vh}
+  .panel{left:5vw;right:5vw}
+  .panel-card{padding:22px}
+  .projects{grid-template-columns:1fr}
+  footer{left:5vw;right:5vw}
+  .nav-right{gap:8px}
+  .cta-secondary{display:none}
+}
+</style>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.143.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.143.0/examples/jsm/"}}</script>
 </head>
 <body>
 <canvas id="scene"></canvas>
 <div id="scroll-host"></div>
 <div id="ui">
-<nav><div class="brand">HARIOM<span>®</span></div><div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#workflow">Process</a><a href="#contact">Contact</a></div><a class="cta secondary" href="mailto:cshariomupadhyay@gmail.com">Contact</a></nav>
-<section class="hero-copy" id="home"><div class="eyebrow">DATA × AI × CREATIVE TECHNOLOGY</div><h1>Build ideas.<br><em>Shape what’s next.</em></h1><p>I’m Hariom — a BSc Computer Science student building practical data, AI and web experiences.</p><div class="ctas"><a class="cta primary" href="#work">Explore work</a><a class="cta secondary" href="https://github.com/G1OUL" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
-<section class="panel" id="about"><div class="panel-card"><div class="eyebrow">01 / ABOUT</div><h2>Curious enough to ask.<br><em>Driven enough to build.</em></h2><p>I work across Python, SQL, Excel, Power BI, AI/ML and web development. My approach is simple: understand the problem, structure the data, build a useful solution, then keep improving it.</p><div class="tags"><span class="tag">PYTHON</span><span class="tag">SQL</span><span class="tag">EXCEL</span><span class="tag">POWER BI</span><span class="tag">AI / ML</span><span class="tag">FLASK</span><span class="tag">JAVASCRIPT</span><span class="tag">GIT</span></div></div></section>
-<section class="panel" id="work"><div class="panel-card"><div class="eyebrow">02 / SELECTED WORK</div><h2>Ideas turned into<br><em>working products.</em></h2><div class="projects">
-<div class="project"><b>FINTECH · AI</b><h3>SmartLoan AI</h3><p>Loan eligibility, EMI calculation, lender matching and decision-support built with Flask and SQLite.</p><a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer">View project ↗</a></div>
-<div class="project"><b>AUTOMOTIVE · AI</b><h3>CarForge AI</h3><p>An AI-inspired experience for designing custom vehicle concepts, materials, wheels and stance.</p><a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer">View project ↗</a></div>
-<div class="project"><b>ML · NASA DATA</b><h3>Coastal Erosion ML</h3><p>Machine-learning and image-processing work exploring coastal erosion under climate-change scenarios.</p><a href="https://github.com/G1OUL" target="_blank" rel="noreferrer">View work ↗</a></div>
-<div class="project"><b>DATA · QA</b><h3>MASTERDB Curation</h3><p>Dataset normalization, canonical registration, validation and metadata preparation workflows.</p><a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer">View repository ↗</a></div>
-</div></div></section>
-<section class="panel" id="contact"><div class="panel-card"><div class="eyebrow">03 / CONTACT</div><h2>Let’s build something<br><em>worth remembering.</em></h2><p>Open to internships, collaborations, data projects and interesting ideas.</p><div class="ctas"><a class="cta primary" href="mailto:cshariomupadhyay@gmail.com">Start a chat</a><a class="cta secondary" href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div></section>
+<nav>
+  <div class="brand">HARIOM<span>®</span></div>
+  <div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#contact">Contact</a></div>
+  <div class="nav-right">
+    <a class="cta-secondary" href="mailto:cshariomupadhyay@gmail.com">Contact</a>
+    <div class="theme-toggle" id="themeToggle" title="Toggle theme">
+      <span class="icon" id="themeIcon">🌙</span>
+      <div class="track"><div class="thumb"></div></div>
+    </div>
+  </div>
+</nav>
+
+<section class="hero-copy" id="home">
+  <div class="eyebrow">DATA × AI × CREATIVE TECHNOLOGY</div>
+  <h1>Build ideas.<br><em>Shape what's next.</em></h1>
+  <p>I'm Hariom — a BSc Computer Science student building practical data, AI and web experiences.</p>
+  <div class="ctas">
+    <a class="cta primary" href="#work">Explore work</a>
+    <a class="cta cta-secondary" href="https://github.com/G1OUL" target="_blank" rel="noreferrer">GitHub ↗</a>
+  </div>
+</section>
+
+<section class="panel" id="about">
+  <div class="panel-card">
+    <div class="eyebrow">01 / ABOUT</div>
+    <h2>Curious enough to ask.<br><em>Driven enough to build.</em></h2>
+    <p>I work across Python, SQL, Excel, Power BI, AI/ML and web development. My approach is simple: understand the problem, structure the data, build a useful solution, then keep improving it.</p>
+    <div class="tags">
+      <span class="tag">PYTHON</span><span class="tag">SQL</span><span class="tag">EXCEL</span>
+      <span class="tag">POWER BI</span><span class="tag">AI / ML</span><span class="tag">FLASK</span>
+      <span class="tag">JAVASCRIPT</span><span class="tag">GIT</span>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="work">
+  <div class="panel-card">
+    <div class="eyebrow">02 / SELECTED WORK</div>
+    <h2>Ideas turned into<br><em>working products.</em></h2>
+    <div class="projects">
+      <div class="project"><b>FINTECH · AI</b><h3>SmartLoan AI</h3><p>Loan eligibility, EMI calculation, lender matching and decision-support built with Flask and SQLite.</p><a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer">View project ↗</a></div>
+      <div class="project"><b>AUTOMOTIVE · AI</b><h3>CarForge AI</h3><p>An AI-inspired experience for designing custom vehicle concepts, materials, wheels and stance.</p><a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer">View project ↗</a></div>
+      <div class="project"><b>ML · NASA DATA</b><h3>Coastal Erosion ML</h3><p>Machine-learning and image-processing work exploring coastal erosion under climate-change scenarios.</p><a href="https://github.com/G1OUL" target="_blank" rel="noreferrer">View work ↗</a></div>
+      <div class="project"><b>DATA · QA</b><h3>MASTERDB Curation</h3><p>Dataset normalization, canonical registration, validation and metadata preparation workflows.</p><a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer">View repository ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="contact">
+  <div class="panel-card">
+    <div class="eyebrow">03 / CONTACT</div>
+    <h2>Let's build something<br><em>worth remembering.</em></h2>
+    <p>Open to internships, collaborations, data projects and interesting ideas.</p>
+    <div class="ctas">
+      <a class="cta primary" href="mailto:cshariomupadhyay@gmail.com">Start a chat</a>
+      <a class="cta cta-secondary" href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer">LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
 <footer><span>© 2026 Hariom Upadhyay</span><span>Built with curiosity.</span><span>@G1OUL</span></footer>
 </div>
 <div id="scroll-hint">scroll ↓</div>
+
 <script type="module">
+/* ===== THEME TOGGLE ===== */
+const THEMES = {
+  dark: { bg:'#050a08', flame:'#0aff7f', flame2:'#aef0c0', atmo:'#7affbf', colLow:'#02160c', colHigh:'#34e89a', opacity:.26, brightness:.45, sceneBg:0x000000 },
+  light:{ bg:'#f4f8f6', flame:'#0a9d5e', flame2:'#7fd4b0', atmo:'#1ab374', colLow:'#d0e8dc', colHigh:'#0a9d5e', opacity:.16, brightness:.30, sceneBg:0xf4f8f6 }
+};
+function getTheme(){ return document.documentElement.dataset.theme || 'dark'; }
+function setTheme(t){
+  document.documentElement.dataset.theme = t;
+  document.getElementById('themeIcon').textContent = t === 'dark' ? '🌙' : '☀️';
+  try{ localStorage.setItem('portfolio-theme', t); }catch(e){}
+  applyThemeToScene(t);
+}
+document.getElementById('themeToggle').addEventListener('click', ()=>{
+  setTheme(getTheme() === 'dark' ? 'light' : 'dark');
+});
+try{ const saved = localStorage.getItem('portfolio-theme'); if(saved) setTheme(saved); }catch(e){}
+
+/* ===== THREE.JS SCENE ===== */
 import * as THREE from 'three';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
 import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
@@ -57,8 +229,6 @@ import {CopyShader} from 'three/addons/shaders/CopyShader.js';
 const Lerp=(a,b,t)=>a+(b-a)*t;
 const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
 function hexToVec3(hex){const n=parseInt(hex.slice(1),16);return new THREE.Vector3(((n>>16)&255)/255,((n>>8)&255)/255,(n&255)/255)}
-
-const bgColor='#02160c',flameColor='#0aff7f',flameColor2='#aef0c0',flameAmt=.2,atmoColor='#7affbf',atmoCount=300,atmoSize=24,atmoSpeed=1,colorLow='#02160c',colorHigh='#34e89a',opacity=.26,pointSize=5.5,brightness=.45,waveHeight=3,flow=1,tilt=0,scale=.275,scrollRise=1,camStartY=7,camStartZ=16,camEndY=.8,camEndZ=-2,lookStartZ=2,lookEndZ=-16,parallax=1.2,pointerRadius=7,pointerStrength=.9;
 
 const SNOISE=`
 vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
@@ -91,37 +261,58 @@ vec3 warp3d(vec3 pos,float t){float curv=.8,a=1.9,b=.7;pos*=2.;pos.x+=curv*sin(t
 void main(){vec2 uv=2.*vUv-1.;vec3 w=pow(warp3d(vec3(uv.x,sin(uv.y),uv.y),iTime*1.5),vec3(1.5));vec3 flame=1.5*uFlameA*w.x;flame*=w.y;flame+=uFlameB*w.z;flame*=smoothstep(.25,1.,abs(uv.y));float md=smoothstep(-.7,1.,-uv.y*uv.x);flame*=md*md;vec3 bg=uBg*(1.-.4*length(uv));vec3 halo=texture2D(haloTexture,vUv).xyz;gl_FragColor=vec4(bg+flame*uFlameAmt+texture2D(bloomTexture,vUv).xyz+texture2D(torusTexture,vUv).xyz+texture2D(tDiffuse,vUv).xyz+halo,1.);}`;
 
 const canvas=document.getElementById('scene');
-const renderer=new THREE.WebGL1Renderer({canvas,antialias:true});renderer.setPixelRatio(devicePixelRatio);renderer.setSize(innerWidth,innerHeight,false);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.VSMShadowMap;
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x000000);scene.fog=new THREE.Fog(0x000000,0,15);
+const renderer=new THREE.WebGL1Renderer({canvas,antialias:true});renderer.setPixelRatio(devicePixelRatio);renderer.setSize(innerWidth,innerHeight,false);
+const scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,400);camera.position.set(0,7,16);scene.add(camera);
 const LAYERS={NONE:0,TORUS_SCENE:1,BLOOM_SCENE:2,ENTIRE_SCENE:3};camera.layers.enable(LAYERS.TORUS_SCENE);camera.layers.enable(LAYERS.BLOOM_SCENE);camera.layers.enable(LAYERS.ENTIRE_SCENE);
 
 const renderPass=new RenderPass(scene,camera);
 const torusComposer=new EffectComposer(renderer);torusComposer.renderToScreen=false;torusComposer.addPass(renderPass);torusComposer.addPass(new ShaderPass(GammaCorrectionShader));torusComposer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.22,.2,0));torusComposer.addPass(new ShaderPass(CopyShader));
 const bloomComposer=new EffectComposer(renderer);bloomComposer.renderToScreen=false;bloomComposer.addPass(renderPass);bloomComposer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.4,.55,0));bloomComposer.addPass(new ShaderPass(GammaCorrectionShader));
-const finalPass=new ShaderPass(new THREE.ShaderMaterial({uniforms:{iTime:{value:0},tDiffuse:{value:null},torusTexture:{value:null},bloomTexture:{value:null},haloTexture:{value:null},uBg:{value:hexToVec3(bgColor)},uFlameA:{value:hexToVec3(flameColor)},uFlameB:{value:hexToVec3(flameColor2)},uFlameAmt:{value:flameAmt}},vertexShader:finalV,fragmentShader:finalF}));
-const finalComposer=new EffectComposer(renderer);finalComposer.addPass(renderPass);finalComposer.addPass(finalPass);finalPass.uniforms.bloomTexture.value=bloomComposer.renderTarget1.texture;finalPass.uniforms.torusTexture.value=torusComposer.renderTarget1.texture;
+const finalPass=new ShaderPass(new THREE.ShaderMaterial({uniforms:{iTime:{value:0},tDiffuse:{value:null},torusTexture:{value:null},bloomTexture:{value:null},haloTexture:{value:null},uBg:{value:hexToVec3(THEMES.dark.bg)},uFlameA:{value:hexToVec3(THEMES.dark.flame)},uFlameB:{value:hexToVec3(THEMES.dark.flame2)},uFlameAmt:{value:.2}},vertexShader:finalV,fragmentShader:finalF}));
+const finalComposer=new EffectComposer(renderer);finalComposer.addPass(renderPass);finalComposer.addPass(finalPass);
+finalPass.uniforms.bloomTexture.value=bloomComposer.renderTarget1.texture;finalPass.uniforms.torusTexture.value=torusComposer.renderTarget1.texture;
 const halo=new THREE.DataTexture(new Uint8Array([0,0,0,255]),1,1,THREE.RGBAFormat);halo.needsUpdate=true;finalPass.uniforms.haloTexture.value=halo;
 
 const group=new THREE.Group();scene.add(group);
 const geom=new THREE.SphereGeometry(4.2,200,600);
-const uniforms={uTime:{value:0},uStream:{value:0},uAppear:{value:0},uColLow:{value:hexToVec3(colorLow)},uColHigh:{value:hexToVec3(colorHigh)},uOpacity:{value:opacity},uSize:{value:pointSize},uBrightness:{value:brightness},uWaveHeight:{value:waveHeight},uFlow:{value:flow},uScale:{value:scale},uCursor:{value:new THREE.Vector3()},uRepelRadius:{value:pointerRadius},uRepelStrength:{value:pointerStrength},uActivity:{value:0}};
+const uniforms={uTime:{value:0},uStream:{value:0},uAppear:{value:0},uColLow:{value:hexToVec3(THEMES.dark.colLow)},uColHigh:{value:hexToVec3(THEMES.dark.colHigh)},uOpacity:{value:.26},uSize:{value:5.5},uBrightness:{value:.45},uWaveHeight:{value:3},uFlow:{value:1},uScale:{value:.275},uCursor:{value:new THREE.Vector3()},uRepelRadius:{value:7},uRepelStrength:{value:.9},uActivity:{value:0}};
 const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms,vertexShader:vertex,fragmentShader:fragment});
 const points=new THREE.Points(geom,mat);points.frustumCulled=false;points.layers.enable(LAYERS.ENTIRE_SCENE);group.add(points);
 
-(function(){const N=Math.round(atmoCount),g=new THREE.BufferGeometry(),p=new Float32Array(N*3),s=new Float32Array(N),seed=new Float32Array(N);for(let i=0;i<N;i++){p[i*3]=2*Math.random()-1;p[i*3+1]=2*Math.random()-1;p[i*3+2]=2*Math.random()-1;s[i]=atmoSize*(.4+Math.random());seed[i]=Math.random()}g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('size',new THREE.BufferAttribute(s,1));g.setAttribute('seed',new THREE.BufferAttribute(seed,1));const m=new THREE.ShaderMaterial({transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,uniforms:{uTime:{value:0},uColor:{value:hexToVec3(atmoColor)},uRes:{value:new THREE.Vector2(innerWidth*devicePixelRatio,innerHeight*devicePixelRatio)}},vertexShader:`attribute float size;attribute float seed;uniform float uTime;uniform vec2 uRes;varying float vA;vec3 warp(vec3 p,float t){float c=.9,a=1.9,b=.02,s=.05;p*=2.;p.x+=c*sin(s*t+a*p.y)+t*b;p.y+=c*cos(s*t+a*p.x);p.y+=c*sin(s*t+a*p.z)+t*b;p.z+=c*cos(s*t+a*p.y);p.z+=c*sin(s*t+a*p.x)+t*b;p.x+=c*cos(s*t+a*p.z);return cos(p+vec3(1,2,4));}void main(){vec3 v=position*4.+warp(position,uTime)*1.2;vec4 mv=modelViewMatrix*vec4(v,1.);float r=length(v);float farF=1.-smoothstep(5.,6.5,r);float nearF=smoothstep(0.,.5,-mv.z);vA=farF*nearF;gl_PointSize=size*uRes.y/900./-mv.z;gl_PointSize=max(gl_PointSize,1.);gl_Position=projectionMatrix*mv;}`,fragmentShader:`uniform vec3 uColor;varying float vA;void main(){vec2 p=gl_PointCoord-.5;float l=length(p);if(l>.5)discard;float tex=smoothstep(.5,0.,l);gl_FragColor=vec4(uColor*tex,tex*vA*.6);}`});const pts=new THREE.Points(g,m);pts.frustumCulled=false;pts.layers.enable(LAYERS.ENTIRE_SCENE);pts.onBeforeRender=()=>{const t=performance.now()/1000;m.uniforms.uTime.value=t*atmoSpeed*8.;pts.position.copy(camera.position);finalPass.uniforms.iTime.value=t};scene.add(pts)})();
+const atmoCount=300,atmoSize=24,atmoSpeed=1;
+(function(){const N=Math.round(atmoCount),g=new THREE.BufferGeometry(),p=new Float32Array(N*3),s=new Float32Array(N),seed=new Float32Array(N);for(let i=0;i<N;i++){p[i*3]=2*Math.random()-1;p[i*3+1]=2*Math.random()-1;p[i*3+2]=2*Math.random()-1;s[i]=atmoSize*(.4+Math.random());seed[i]=Math.random()}g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('size',new THREE.BufferAttribute(s,1));g.setAttribute('seed',new THREE.BufferAttribute(seed,1));const m=new THREE.ShaderMaterial({transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,uniforms:{uTime:{value:0},uColor:{value:hexToVec3(THEMES.dark.atmo)},uRes:{value:new THREE.Vector2(innerWidth*devicePixelRatio,innerHeight*devicePixelRatio)}},vertexShader:`attribute float size;attribute float seed;uniform float uTime;uniform vec2 uRes;varying float vA;vec3 warp(vec3 p,float t){float c=.9,a=1.9,b=.02,s=.05;p*=2.;p.x+=c*sin(s*t+a*p.y)+t*b;p.y+=c*cos(s*t+a*p.x);p.y+=c*sin(s*t+a*p.z)+t*b;p.z+=c*cos(s*t+a*p.y);p.z+=c*sin(s*t+a*p.x);t*b;p.x+=c*cos(s*t+a*p.z);return cos(p+vec3(1,2,4));}void main(){vec3 v=position*4.+warp(position,uTime)*1.2;vec4 mv=modelViewMatrix*vec4(v,1.);float r=length(v);float farF=1.-smoothstep(5.,6.5,r);float nearF=smoothstep(0.,.5,-mv.z);vA=farF*nearF;gl_PointSize=size*uRes.y/900./-mv.z;gl_PointSize=max(gl_PointSize,1.);gl_Position=projectionMatrix*mv;}`,fragmentShader:`uniform vec3 uColor;varying float vA;void main(){vec2 p=gl_PointCoord-.5;float l=length(p);if(l>.5)discard;float tex=smoothstep(.5,0.,l);gl_FragColor=vec4(uColor*tex,tex*vA*.6);}`});const pts=new THREE.Points(g,m);pts.frustumCulled=false;pts.layers.enable(LAYERS.ENTIRE_SCENE);pts.onBeforeRender=()=>{const t=performance.now()/1000;m.uniforms.uTime.value=t*atmoSpeed*8.;pts.position.copy(camera.position);finalPass.uniforms.iTime.value=t};scene.add(pts)})();
 
-let scrollTarget=0,scrollSmooth=0,scrollCurrent=0,stream=0;const mouseTarget={x:0,y:0},mouse={x:0,y:0};const POINTER={world:new THREE.Vector3(),activity:0,active:false,lastMove:performance.now()};const _ndc=new THREE.Vector3(),_dir=new THREE.Vector3(),_tgt=new THREE.Vector3();
+function applyThemeToScene(t){
+  const c=THEMES[t];
+  scene.background=new THREE.Color(c.sceneBg);
+  scene.fog=new THREE.Color(c.sceneBg);
+  finalPass.uniforms.uBg.value.copy(hexToVec3(c.bg));
+  finalPass.uniforms.uFlameA.value.copy(hexToVec3(c.flame));
+  finalPass.uniforms.uFlameB.value.copy(hexToVec3(c.flame2));
+  uniforms.uColLow.value.copy(hexToVec3(c.colLow));
+  uniforms.uColHigh.value.copy(hexToVec3(c.colHigh));
+  uniforms.uOpacity.value=c.opacity;
+  uniforms.uBrightness.value=c.brightness;
+}
+applyThemeToScene(getTheme());
+
+let scrollTarget=0,scrollSmooth=0,scrollCurrent=0,stream=0;const mouseTarget={x:0,y:0},mouse={x:0,y:0};
+const POINTER={world:new THREE.Vector3(),activity:0,active:false,lastMove:performance.now()};
+const _ndc=new THREE.Vector3(),_dir=new THREE.Vector3(),_tgt=new THREE.Vector3();
 function updateScroll(){const max=document.documentElement.scrollHeight-innerHeight;scrollTarget=max>0?clamp(scrollY/max,0,1):0}
 addEventListener('scroll',updateScroll,{passive:true});
 addEventListener('mousemove',e=>{mouseTarget.x=e.clientX/innerWidth*2-1;mouseTarget.y=-((e.clientY/innerHeight)*2-1);POINTER.active=true;POINTER.lastMove=performance.now()},{passive:true});
 addEventListener('mouseout',()=>POINTER.active=false);
 function updatePointerWorld(){_tgt.set(0,0,0);if(POINTER.active){_ndc.set(mouse.x,mouse.y,.5).unproject(camera);_dir.copy(_ndc).sub(camera.position).normalize();const dn=_dir.z;if(Math.abs(dn)>1e-4){const tt=-camera.position.z/dn;if(tt>0&&Number.isFinite(tt))_tgt.copy(camera.position).addScaledVector(_dir,tt)}}POINTER.world.lerp(_tgt,.12);const idle=(performance.now()-POINTER.lastMove)/1000;POINTER.activity+=(((POINTER.active&&idle<3)?1:0)-POINTER.activity)*.06}
 const appearStart=performance.now(),panels=[...document.querySelectorAll('.panel')];
-function updateScene(scroll,m){const t=performance.now()/1000;stream+=Math.min(.05,t-(updateScene.t0||t))*flow*2*4;updateScene.t0=t;uniforms.uTime.value=t;uniforms.uStream.value=stream;uniforms.uWaveHeight.value=waveHeight*(1+scroll*scrollRise);const ea=Math.min(scroll/.35,1),e=ea*ea*(3-2*ea);camera.position.set(m.x*parallax,Lerp(camStartY,camEndY,e)+m.y*parallax*.3,Lerp(camStartZ,camEndZ,e));camera.lookAt(m.x*parallax*.5,Lerp(0,.6,e),Lerp(lookStartZ,lookEndZ,e));group.rotation.x=-tilt;group.rotation.y=0;updatePointerWorld();uniforms.uCursor.value.copy(POINTER.world);uniforms.uActivity.value=POINTER.activity;const elapsed=(performance.now()-appearStart)/1000;uniforms.uAppear.value=clamp((elapsed-.2)/1.4,0,1)}
+const camStartY=7,camStartZ=16,camEndY=.8,camEndZ=-2,lookStartZ=2,lookEndZ=-16,parallax=1.2;
+function updateScene(scroll,m){const t=performance.now()/1000;stream+=Math.min(.05,t-(updateScene.t0||t))*4*4;updateScene.t0=t;uniforms.uTime.value=t;uniforms.uStream.value=stream;uniforms.uWaveHeight.value=3*(1+scroll);const ea=Math.min(scroll/.35,1),e=ea*ea*(3-2*ea);camera.position.set(m.x*parallax,Lerp(camStartY,camEndY,e)+m.y*parallax*.3,Lerp(camStartZ,camEndZ,e));camera.lookAt(m.x*parallax*.5,Lerp(0,.6,e),Lerp(lookStartZ,lookEndZ,e));updatePointerWorld();uniforms.uCursor.value.copy(POINTER.world);uniforms.uActivity.value=POINTER.activity;const elapsed=(performance.now()-appearStart)/1000;uniforms.uAppear.value=clamp((elapsed-.2)/1.4,0,1)}
 function render(){requestAnimationFrame(render);scrollSmooth=Lerp(scrollSmooth,scrollTarget,.10);scrollCurrent=Lerp(scrollCurrent,scrollSmooth,.06);mouse.x=Lerp(mouse.x,mouseTarget.x,.06);mouse.y=Lerp(mouse.y,mouseTarget.y,.06);updateScene(scrollCurrent,mouse);camera.layers.set(LAYERS.TORUS_SCENE);torusComposer.render();camera.layers.set(LAYERS.BLOOM_SCENE);bloomComposer.render();camera.layers.set(LAYERS.ENTIRE_SCENE);finalComposer.render();panels.forEach((p,i)=>{const start=.22+i*.105;const end=start+.24;p.classList.toggle('visible',scrollCurrent>start&&scrollCurrent<end)})}
 function resize(){const w=innerWidth,h=innerHeight,dpr=devicePixelRatio;renderer.setPixelRatio(dpr);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();[torusComposer,bloomComposer,finalComposer].forEach(c=>{c.setPixelRatio(dpr);c.setSize(w,h)});updateScroll()}
 addEventListener('resize',resize);resize();render();
+
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{const target=document.querySelector(a.getAttribute('href'));if(target){e.preventDefault();target.scrollIntoView({behavior:'smooth'})}})});
 </script>
 </body>
 </html>
