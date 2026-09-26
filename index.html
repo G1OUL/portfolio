@@ -25,27 +25,101 @@ h1{font-size:clamp(48px,9vw,118px);line-height:.9;letter-spacing:-.065em;margin:
 .projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:25px}.project{border:1px solid #7affbf20;border-radius:18px;padding:18px;background:#031b1088}.project b{color:#7affbf;font-size:11px;letter-spacing:.15em}.project h3{margin:9px 0 6px}.project p{margin:0;font-size:13px;line-height:1.5}
 footer{position:absolute;bottom:24px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:#7fae9b;font-size:11px;letter-spacing:.08em}
 @media(max-width:700px){.links{display:none}.hero-copy{left:7vw;right:7vw;top:25vh}.panel{left:5vw;right:5vw}.panel-card{padding:22px}.projects{grid-template-columns:1fr}footer{left:5vw;right:5vw}}
-.workflow-line{margin:0 0 22px;color:#9ee8c4;font-size:13px;letter-spacing:.08em}.workflow-line span{color:#34e89a;font-weight:700}.project{transition:transform .35s ease,border-color .35s ease,background .35s ease}.project:hover{transform:translateY(-5px);border-color:#34e89a55;background:#062619aa}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}@media(max-width:700px){.workflow-line{line-height:2}}\n</style>
+.workflow-line{margin:0 0 22px;color:#9ee8c4;font-size:13px;letter-spacing:.08em}.workflow-line span{color:#34e89a;font-weight:700}.project{transition:transform .35s ease,border-color .35s ease,background .35s ease}.project:hover{transform:translateY(-5px);border-color:#34e89a55;background:#062619aa}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}@media(max-width:700px){.workflow-line{line-height:2}}\n.about-grid,.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.about-grid div,.focus-grid div{display:flex;flex-direction:column;gap:7px;padding:18px;border:1px solid #7affbf18;border-radius:16px;background:#031b1066}.about-grid b,.focus-grid b{font-size:10px;color:#34e89a;letter-spacing:.14em}.about-grid strong,.focus-grid strong{font-size:20px}.about-grid span,.focus-grid span{font-size:12px;line-height:1.5;color:#9fc7b3}.skill-groups{display:grid;gap:18px;margin-top:28px}.skill-group>b{font-size:10px;letter-spacing:.15em;color:#7affbf}.workflow{display:grid;gap:10px;margin-top:25px}.workflow div{display:grid;grid-template-columns:45px 150px 1fr;gap:15px;align-items:center;padding:14px 16px;border:1px solid #7affbf18;border-radius:14px;background:#031b1066}.workflow span{color:#34e89a;font-weight:700}.workflow strong{font-size:14px}.workflow p{margin:0;font-size:12px;color:#9fc7b3}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}.project{transition:.3s ease}.project:hover{transform:translateY(-4px);border-color:#34e89a55}.links a{transition:.2s}.links a:hover{color:#34e89a}.panel-card{width:100%;box-sizing:border-box}@media(max-width:700px){.about-grid,.focus-grid{grid-template-columns:1fr}.workflow div{grid-template-columns:35px 1fr}.workflow p{grid-column:2}.links{display:none}}\n</style>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.143.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.143.0/examples/jsm/"}}</script>
 </head>
 <body>
 <canvas id="scene"></canvas>
 <div id="scroll-host"></div>
 <div id="ui">
-<nav><div class="brand">HARIOM<span>®</span></div><div class="links"><a href="#home">Home</a><a href="#work">Work</a><a href="#about">About</a><a href="#contact">Contact</a></div><a class="cta secondary" href="mailto:cshariomupadhyay@gmail.com">Contact</a></nav>
-<section class="hero-copy" id="home"><div class="eyebrow">DATA × AI × CREATIVE TECHNOLOGY</div><h1>Build ideas.<br><em>Shape what’s next.</em></h1><p>I’m Hariom — a BSc Computer Science student building practical data, AI and web experiences.</p><div class="ctas"><a class="cta primary" href="#work">Explore my workflow</a><a class="cta secondary" href="https://github.com/G1OUL" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
-<section class="panel" id="about"><div class="panel-card"><div class="eyebrow">01 / ABOUT</div><h2>Curious enough to ask.<br><em>Driven enough to build.</em></h2><p>I work across Python, SQL, Excel, Power BI, AI/ML and web development. My approach is simple: understand the problem, structure the data, build a useful solution, then keep improving it.</p><div class="tags"><span class="tag">PYTHON</span><span class="tag">SQL</span><span class="tag">EXCEL</span><span class="tag">POWER BI</span><span class="tag">AI / ML</span><span class="tag">FLASK</span><span class="tag">JAVASCRIPT</span><span class="tag">GIT</span></div></div></section>
-<section class="panel" id="work"><div class="panel-card"><div class="eyebrow">02 / SELECTED WORK</div><h2>See how an idea becomes<br><em>something usable.</em></h2><p class="workflow-line"><span>01</span> Problem → <span>02</span> Data → <span>03</span> Build → <span>04</span> Test → <span>05</span> Improve</p><div class="projects">
-<div class="project"><b>FINTECH · AI</b><h3>SmartLoan AI</h3><p>Start with a lending problem → structure inputs → calculate EMI and eligibility → match lenders → present the result clearly.</p><a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer">Explore build ↗</a></div>
-<div class="project"><b>AUTOMOTIVE · AI</b><h3>CarForge AI</h3><p>Start with a car idea → generate a concept → customize the design → experiment with materials, wheels and stance.</p><a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer">Explore build ↗</a></div>
-<div class="project"><b>ML · NASA DATA</b><h3>Coastal Erosion ML</h3><p>Collect environmental data → clean and validate it → apply ML/image processing → study patterns under climate scenarios.</p><a href="https://github.com/G1OUL" target="_blank" rel="noreferrer">Explore research ↗</a></div>
-<div class="project"><b>DATA · QA</b><h3>MASTERDB Curation</h3><p>Raw dataset → normalization → canonical registration → validation → metadata-ready records for integration.</p><a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer">Explore workflow ↗</a></div>
-</div></div></section>
-<section class="panel" id="contact"><div class="panel-card"><div class="eyebrow">03 / CONTACT</div><h2>Let’s build something<br><em>worth remembering.</em></h2><p>Open to internships, collaborations, data projects and interesting ideas.</p><div class="ctas"><a class="cta primary" href="mailto:cshariomupadhyay@gmail.com">Start a chat</a><a class="cta secondary" href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div></section>
-<footer><span>© 2026 Hariom Upadhyay</span><span>Built with curiosity.</span><span>@G1OUL</span></footer>
+<nav>
+  <div class="brand">HARIOM<span>®</span></div>
+  <div class="links">
+    <a href="#home">Home</a><a href="#about">About</a><a href="#skills">Skills</a><a href="#projects">Projects</a><a href="#contact">Contact</a>
+  </div>
+  <a class="cta secondary" href="mailto:cshariomupadhyay@gmail.com">Contact</a>
+</nav>
+
+<section class="hero-copy" id="home">
+  <div class="eyebrow">DATA × AI × CREATIVE TECHNOLOGY</div>
+  <h1>Build ideas.<br><em>Shape what’s next.</em></h1>
+  <p>I’m Hariom — a BSc Computer Science student building practical data, AI and web experiences.</p>
+  <div class="ctas"><a class="cta primary" href="#about">Discover my work</a><a class="cta secondary" href="https://github.com/G1OUL" target="_blank" rel="noreferrer">GitHub ↗</a></div>
+</section>
+
+<section class="panel" id="about">
+  <div class="panel-card">
+    <div class="eyebrow">01 / ABOUT ME</div>
+    <h2>Curious enough to ask.<br><em>Driven enough to build.</em></h2>
+    <p>I work across data analytics, applied AI and web development. I enjoy taking an idea, understanding the problem behind it, structuring the information, and turning it into something people can actually use.</p>
+    <div class="about-grid">
+      <div><b>01</b><strong>Think</strong><span>Understand the problem before choosing the technology.</span></div>
+      <div><b>02</b><strong>Build</strong><span>Create practical solutions with data, AI and code.</span></div>
+      <div><b>03</b><strong>Improve</strong><span>Test, refine and make the experience clearer.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="skills">
+  <div class="panel-card">
+    <div class="eyebrow">02 / SKILLS</div>
+    <h2>Tools I use to turn<br><em>ideas into systems.</em></h2>
+    <div class="skill-groups">
+      <div class="skill-group"><b>DATA & ANALYTICS</b><div class="tags"><span class="tag">Python</span><span class="tag">SQL / MySQL</span><span class="tag">Excel</span><span class="tag">Power BI</span><span class="tag">EDA</span><span class="tag">Data Cleaning</span></div></div>
+      <div class="skill-group"><b>AI / MACHINE LEARNING</b><div class="tags"><span class="tag">Classification</span><span class="tag">Recommendation</span><span class="tag">Rule-Based Systems</span><span class="tag">Image Processing</span></div></div>
+      <div class="skill-group"><b>DEVELOPMENT</b><div class="tags"><span class="tag">HTML</span><span class="tag">CSS</span><span class="tag">JavaScript</span><span class="tag">Flask</span><span class="tag">SQLite</span><span class="tag">Git / GitHub</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="projects">
+  <div class="panel-card">
+    <div class="eyebrow">03 / SELECTED PROJECTS</div>
+    <h2>Things I’ve<br><em>built.</em></h2>
+    <div class="projects">
+      <div class="project"><b>01 · FINTECH · AI</b><h3>SmartLoan AI</h3><p>Loan eligibility, EMI calculation, lender matching and decision-support built with Flask and SQLite.</p><a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer">View project ↗</a></div>
+      <div class="project"><b>02 · AUTOMOTIVE · AI</b><h3>CarForge AI</h3><p>An AI-assisted automotive design experience for custom vehicle concepts, materials, wheels and stance.</p><a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer">View project ↗</a></div>
+      <div class="project"><b>03 · ML · NASA DATA</b><h3>Coastal Erosion ML</h3><p>Machine-learning and image-processing work exploring coastal erosion under climate-change scenarios.</p><a href="https://github.com/G1OUL" target="_blank" rel="noreferrer">View work ↗</a></div>
+      <div class="project"><b>04 · DATA · QA</b><h3>MASTERDB Curation</h3><p>Dataset normalization, canonical registration, validation and metadata preparation for integration.</p><a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer">View repository ↗</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="workflow">
+  <div class="panel-card">
+    <div class="eyebrow">04 / MY WORKFLOW</div>
+    <h2>From a rough idea<br><em>to a useful result.</em></h2>
+    <div class="workflow">
+      <div><span>01</span><strong>Understand</strong><p>Define the problem, users and expected outcome.</p></div>
+      <div><span>02</span><strong>Structure</strong><p>Collect, clean and organize the data or requirements.</p></div>
+      <div><span>03</span><strong>Build</strong><p>Develop the model, logic, interface or application.</p></div>
+      <div><span>04</span><strong>Validate</strong><p>Test outputs, identify issues and improve reliability.</p></div>
+      <div><span>05</span><strong>Ship</strong><p>Package the result into something usable and presentable.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="panel" id="focus">
+  <div class="panel-card">
+    <div class="eyebrow">05 / CURRENT FOCUS</div>
+    <h2>Learning today.<br><em>Building tomorrow.</em></h2>
+    <p>I’m strengthening my foundation in data analytics, AI/ML and product development while building projects that demonstrate practical problem-solving.</p>
+    <div class="focus-grid"><div><b>NOW</b><strong>Learn</strong><span>Deepen Python, SQL, analytics and AI fundamentals.</span></div><div><b>NEXT</b><strong>Build</strong><span>Create stronger portfolio-grade applications and data products.</span></div><div><b>GOAL</b><strong>Grow</strong><span>Work on real-world problems through internships, collaborations and projects.</span></div></div>
+  </div>
+</section>
+
+<section class="panel" id="contact">
+  <div class="panel-card">
+    <div class="eyebrow">06 / CONTACT</div>
+    <h2>Let’s build something<br><em>worth remembering.</em></h2>
+    <p>Open to internships, collaborations, data projects and interesting ideas.</p>
+    <div class="ctas"><a class="cta primary" href="mailto:cshariomupadhyay@gmail.com">Start a chat</a><a class="cta secondary" href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer">LinkedIn ↗</a></div>
+  </div>
+</section>
+
+<footer><span>© 2026 Hariom Upadhyay</span><span>DATA × AI</span><span>@G1OUL</span></footer>
 </div>
 <div id="scroll-hint">scroll ↓</div>
-
 <script type="module">
 import * as THREE from 'three';
 import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
