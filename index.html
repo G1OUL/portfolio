@@ -1,127 +1,209 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Hariom Upadhyay — Data, AI and creative technology portfolio.">
-<title>Hariom Upadhyay — Flow</title>
-<style>
-html,body{margin:0;padding:0;background:#000;color:#dfffee;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif}
-body{overflow-x:hidden}#scene{position:fixed;inset:0;width:100vw;height:100vh;display:block;z-index:0}
-#scroll-host{height:820vh;position:relative;z-index:1;pointer-events:none}
-#scroll-hint{position:fixed;z-index:5;left:50%;bottom:24px;transform:translateX(-50%);font:500 11px/1.2 system-ui;letter-spacing:.28em;text-transform:uppercase;color:#7affbf88;transition:opacity .4s}
-#ui{position:fixed;inset:0;z-index:4;pointer-events:none}
-nav{position:absolute;top:22px;left:50%;transform:translateX(-50%);width:min(1120px,calc(100% - 32px));display:flex;align-items:center;justify-content:space-between;box-sizing:border-box;padding:14px 18px;border:1px solid #7affbf1c;border-radius:18px;background:#02160c44;backdrop-filter:blur(16px);box-shadow:0 10px 50px #0008}
-.brand{font-weight:700;letter-spacing:.16em;color:#eafff4}.brand span{color:#34e89a}
-.links{display:flex;gap:24px}.links a{color:#c7ead9;text-decoration:none;font-size:12px;letter-spacing:.12em;text-transform:uppercase}
-.links a:hover{color:#34e89a}.hero-copy{position:absolute;left:7vw;top:29vh;max-width:700px}.eyebrow{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:#7affbf;margin-bottom:18px}
-h1{font-size:clamp(48px,9vw,118px);line-height:.9;letter-spacing:-.065em;margin:0;color:#effff7;text-shadow:0 0 50px #0aff7f22}h1 em{font-style:normal;color:#34e89a}
-.hero-copy p{max-width:560px;font-size:clamp(16px,2vw,22px);line-height:1.55;color:#c2dfd0;margin:28px 0}
-.ctas{display:flex;gap:12px}.cta{pointer-events:auto;padding:13px 18px;border-radius:999px;text-decoration:none;font-size:12px;letter-spacing:.1em;text-transform:uppercase}.primary{background:#34e89a;color:#00190d}.secondary{border:1px solid #7affbf44;background:#02160c66;color:#dfffee}
-.panel{position:absolute;left:7vw;right:7vw;min-height:60vh;display:flex;align-items:center;opacity:0;transform:translateY(30px);transition:.6s ease;pointer-events:none}.panel.visible{opacity:1;transform:none}
-.panel-card{max-width:760px;padding:32px;border:1px solid #7affbf22;border-radius:28px;background:#02160c7d;backdrop-filter:blur(18px);box-shadow:0 25px 90px #0008}
-.panel h2{font-size:clamp(38px,6vw,76px);line-height:.95;letter-spacing:-.05em;margin:0 0 20px}.panel h2 em{color:#34e89a;font-style:normal}.panel p{font-size:17px;line-height:1.7;color:#b8d7c7}
-.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}.tag{border:1px solid #7affbf26;padding:8px 11px;border-radius:999px;color:#9ee8c4;font-size:11px;letter-spacing:.08em}
-.projects{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:25px}.project{border:1px solid #7affbf20;border-radius:18px;padding:18px;background:#031b1088}.project b{color:#7affbf;font-size:11px;letter-spacing:.15em}.project h3{margin:9px 0 6px}.project p{margin:0;font-size:13px;line-height:1.5}
-footer{position:absolute;bottom:24px;left:7vw;right:7vw;display:flex;justify-content:space-between;color:#7fae9b;font-size:11px;letter-spacing:.08em}
-@media(max-width:700px){.links{display:none}.hero-copy{left:7vw;right:7vw;top:25vh}.panel{left:5vw;right:5vw}.panel-card{padding:22px}.projects{grid-template-columns:1fr}footer{left:5vw;right:5vw}}
-.workflow-line{margin:0 0 22px;color:#9ee8c4;font-size:13px;letter-spacing:.08em}.workflow-line span{color:#34e89a;font-weight:700}.project{transition:transform .35s ease,border-color .35s ease,background .35s ease}.project:hover{transform:translateY(-5px);border-color:#34e89a55;background:#062619aa}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}@media(max-width:700px){.workflow-line{line-height:2}}\n.about-grid,.focus-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:28px}.about-grid div,.focus-grid div{display:flex;flex-direction:column;gap:7px;padding:18px;border:1px solid #7affbf18;border-radius:16px;background:#031b1066}.about-grid b,.focus-grid b{font-size:10px;color:#34e89a;letter-spacing:.14em}.about-grid strong,.focus-grid strong{font-size:20px}.about-grid span,.focus-grid span{font-size:12px;line-height:1.5;color:#9fc7b3}.skill-groups{display:grid;gap:18px;margin-top:28px}.skill-group>b{font-size:10px;letter-spacing:.15em;color:#7affbf}.workflow{display:grid;gap:10px;margin-top:25px}.workflow div{display:grid;grid-template-columns:45px 150px 1fr;gap:15px;align-items:center;padding:14px 16px;border:1px solid #7affbf18;border-radius:14px;background:#031b1066}.workflow span{color:#34e89a;font-weight:700}.workflow strong{font-size:14px}.workflow p{margin:0;font-size:12px;color:#9fc7b3}.project a{display:inline-block;margin-top:14px;color:#7affbf;text-decoration:none;font-size:11px;letter-spacing:.1em;text-transform:uppercase}.project{transition:.3s ease}.project:hover{transform:translateY(-4px);border-color:#34e89a55}.links a{transition:.2s}.links a:hover{color:#34e89a}.panel-card{width:100%;box-sizing:border-box}@media(max-width:700px){.about-grid,.focus-grid{grid-template-columns:1fr}.workflow div{grid-template-columns:35px 1fr}.workflow p{grid-column:2}.links{display:none}}\n</style>
+<meta name="description" content="Hariom Upadhyay — Building ideas at the intersection of data, AI and creative technology.">
+<title>Hariom Upadhyay — Building What's Next</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+<script>(function(){try{var t=localStorage.getItem('portfolio-theme')||'dark';document.documentElement.dataset.theme=t;}catch(e){document.documentElement.dataset.theme='dark';}})();</script>
+<noscript><style>.section{opacity:1!important;transform:none!important}</style></noscript>
 <script type="importmap">{"imports":{"three":"https://unpkg.com/three@0.143.0/build/three.module.js","three/addons/":"https://unpkg.com/three@0.143.0/examples/jsm/"}}</script>
 </head>
 <body>
-<canvas id="scene"></canvas>
-<div id="scroll-host"></div>
-<div id="ui">
-<nav><div class="brand">HARIOM<span>®</span></div><div class="links"><a href="#home">Home</a><a href="#about">About</a><a href="#work">Work</a><a href="#workflow">Process</a><a href="#contact">Contact</a></div><a class="cta secondary" href="mailto:cshariomupadhyay@gmail.com">Contact</a></nav>
-<section class="hero-copy" id="home"><div class="eyebrow">DATA × AI × CREATIVE TECHNOLOGY</div><h1>Build ideas.<br><em>Shape what’s next.</em></h1><p>I’m Hariom — a BSc Computer Science student building practical data, AI and web experiences.</p><div class="ctas"><a class="cta primary" href="#work">Explore work</a><a class="cta secondary" href="https://github.com/G1OUL" target="_blank" rel="noreferrer">GitHub ↗</a></div></section>
-<section class="panel" id="about"><div class="panel-card"><div class="eyebrow">01 / ABOUT</div><h2>Curious enough to ask.<br><em>Driven enough to build.</em></h2><p>I work across Python, SQL, Excel, Power BI, AI/ML and web development. My approach is simple: understand the problem, structure the data, build a useful solution, then keep improving it.</p><div class="tags"><span class="tag">PYTHON</span><span class="tag">SQL</span><span class="tag">EXCEL</span><span class="tag">POWER BI</span><span class="tag">AI / ML</span><span class="tag">FLASK</span><span class="tag">JAVASCRIPT</span><span class="tag">GIT</span></div></div></section>
-<section class="panel" id="work"><div class="panel-card"><div class="eyebrow">02 / SELECTED WORK</div><h2>Ideas turned into<br><em>working products.</em></h2><div class="projects">
-<div class="project"><b>FINTECH · AI</b><h3>SmartLoan AI</h3><p>Loan eligibility, EMI calculation, lender matching and decision-support built with Flask and SQLite.</p><a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer">View project ↗</a></div>
-<div class="project"><b>AUTOMOTIVE · AI</b><h3>CarForge AI</h3><p>An AI-inspired experience for designing custom vehicle concepts, materials, wheels and stance.</p><a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer">View project ↗</a></div>
-<div class="project"><b>ML · NASA DATA</b><h3>Coastal Erosion ML</h3><p>Machine-learning and image-processing work exploring coastal erosion under climate-change scenarios.</p><a href="https://github.com/G1OUL" target="_blank" rel="noreferrer">View work ↗</a></div>
-<div class="project"><b>DATA · QA</b><h3>MASTERDB Curation</h3><p>Dataset normalization, canonical registration, validation and metadata preparation workflows.</p><a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer">View repository ↗</a></div>
-</div></div></section>
-<section class="panel" id="contact"><div class="panel-card"><div class="eyebrow">03 / CONTACT</div><h2>Let’s build something<br><em>worth remembering.</em></h2><p>Open to internships, collaborations, data projects and interesting ideas.</p><div class="ctas"><a class="cta primary" href="mailto:cshariomupadhyay@gmail.com">Start a chat</a><a class="cta secondary" href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer">LinkedIn ↗</a></div></div></section>
-<footer><span>© 2026 Hariom Upadhyay</span><span>Built with curiosity.</span><span>@G1OUL</span></footer>
-</div>
-<div id="scroll-hint">scroll ↓</div>
-<script type="module">
-import * as THREE from 'three';
-import {EffectComposer} from 'three/addons/postprocessing/EffectComposer.js';
-import {RenderPass} from 'three/addons/postprocessing/RenderPass.js';
-import {UnrealBloomPass} from 'three/addons/postprocessing/UnrealBloomPass.js';
-import {ShaderPass} from 'three/addons/postprocessing/ShaderPass.js';
-import {GammaCorrectionShader} from 'three/addons/shaders/GammaCorrectionShader.js';
-import {CopyShader} from 'three/addons/shaders/CopyShader.js';
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="cursor-dot" id="cursorDot" aria-hidden="true"></div>
+<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
-const Lerp=(a,b,t)=>a+(b-a)*t;
-const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
-function hexToVec3(hex){const n=parseInt(hex.slice(1),16);return new THREE.Vector3(((n>>16)&255)/255,((n>>8)&255)/255,(n&255)/255)}
+<header class="nav">
+  <a href="#hero" class="nav-logo">HARIOM</a>
+  <nav class="nav-links">
+    <a href="#work" data-nav="work">Work</a>
+    <a href="#about" data-nav="about">About</a>
+    <a href="#process" data-nav="process">Process</a>
+    <a href="#experiments" data-nav="experiments">Experiments</a>
+    <a href="#contact" data-nav="contact">Contact</a>
+  </nav>
+  <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark/light theme">
+    <span class="theme-icon" id="themeIcon">🌙</span>
+  </button>
+</header>
 
-const bgColor='#02160c',flameColor='#0aff7f',flameColor2='#aef0c0',flameAmt=.2,atmoColor='#7affbf',atmoCount=300,atmoSize=24,atmoSpeed=1,colorLow='#02160c',colorHigh='#34e89a',opacity=.26,pointSize=5.5,brightness=.45,waveHeight=3,flow=1,tilt=0,scale=.275,scrollRise=1,camStartY=7,camStartZ=16,camEndY=.8,camEndZ=-2,lookStartZ=2,lookEndZ=-16,parallax=1.2,pointerRadius=7,pointerStrength=.9;
+<nav class="mobile-nav" aria-label="Mobile navigation">
+  <a href="#hero" data-nav="hero">Home</a>
+  <a href="#work" data-nav="work">Work</a>
+  <a href="#about" data-nav="about">About</a>
+  <a href="#process" data-nav="process">Process</a>
+  <a href="#contact" data-nav="contact">Contact</a>
+</nav>
 
-const SNOISE=`
-vec4 permute(vec4 x){return mod(((x*34.0)+1.0)*x, 289.0);}
-vec4 taylorInvSqrt(vec4 r){return 1.79284291400159 - 0.85373472095314 * r;}
-float snoise(vec3 v){
- const vec2 C=vec2(1.0/6.0,1.0/3.0);const vec4 D=vec4(0.0,0.5,1.0,2.0);
- vec3 i=floor(v+dot(v,C.yyy));vec3 x0=v-i+dot(i,C.xxx);
- vec3 g=step(x0.yzx,x0.xyz);vec3 l=1.0-g;
- vec3 i1=min(g.xyz,l.zxy);vec3 i2=max(g.xyz,l.zxy);
- vec3 x1=x0-i1+1.0*C.xxx;vec3 x2=x0-i2+2.0*C.xxx;vec3 x3=x0-1.0+3.0*C.xxx;
- i=mod(i,289.0);
- vec4 p=permute(permute(permute(i.z+vec4(0.0,i1.z,i2.z,1.0))+i.y+vec4(0.0,i1.y,i2.y,1.0))+i.x+vec4(0.0,i1.x,i2.x,1.0));
- float n_=1.0/7.0;vec3 ns=n_*D.wyz-D.xzx;vec4 j=p-49.0*floor(p*ns.z*ns.z);
- vec4 x_=floor(j*ns.z);vec4 y_=floor(j-7.0*x_);vec4 x=x_*ns.x+ns.yyyy;vec4 y=y_*ns.x+ns.yyyy;vec4 h=1.0-abs(x)-abs(y);
- vec4 b0=vec4(x.xy,y.xy);vec4 b1=vec4(x.zw,y.zw);vec4 s0=floor(b0)*2.0+1.0;vec4 s1=floor(b1)*2.0+1.0;vec4 sh=-step(h,vec4(0.0));
- vec4 a0=b0.xzyw+s0.xzyw*sh.xxyy;vec4 a1=b1.xzyw+s1.xzyw*sh.zzww;
- vec3 p0=vec3(a0.xy,h.x);vec3 p1=vec3(a0.zw,h.y);vec3 p2=vec3(a1.xy,h.z);vec3 p3=vec3(a1.zw,h.w);
- vec4 norm=taylorInvSqrt(vec4(dot(p0,p0),dot(p1,p1),dot(p2,p2),dot(p3,p3)));p0*=norm.x;p1*=norm.y;p2*=norm.z;p3*=norm.w;
- vec4 m=max(0.5-vec4(dot(x0,x0),dot(x1,x1),dot(x2,x2),dot(x3,x3)),0.0);m=m*m;
- return 42.0*dot(m*m,vec4(dot(p0,x0),dot(p1,x1),dot(p2,x2),dot(p3,x3)));
-}`;
+<main>
+  <section class="section hero" id="hero">
+    <div class="hero-content">
+      <div class="hero-label">DATA × AI × CREATIVE TECHNOLOGY</div>
+      <h1 class="hero-name">HARIOM<br>UPADHYAY</h1>
+      <p class="hero-statement">Building ideas at the intersection of <em>data, AI &amp; technology.</em></p>
+      <p class="hero-intro">BSc Computer Science student exploring data, AI, machine learning and creative technology — building practical products from ideas.</p>
+      <div class="hero-actions">
+        <a href="#work" class="btn btn-primary magnetic">Explore my work</a>
+        <a href="https://github.com/G1OUL" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">GitHub ↗</a>
+      </div>
+    </div>
+    <div class="scroll-hint">Scroll ↓</div>
+  </section>
 
-const vertex=`uniform float uTime,uStream,uSize,uWaveHeight,uFlow,uScale;uniform vec3 uColLow,uColHigh,uCursor;uniform float uRepelRadius,uRepelStrength,uActivity;varying float vFade;varying vec3 vColor;${SNOISE}
-void main(){vec3 wp=vec3(position.x*13.0,0.0,position.z*25.0);wp.x+=position.y*6.0;float zc=wp.z+uStream;float wn=snoise(vec3(wp.x*.08,zc*.08,uTime*.15*uFlow))*2.0;wn+=snoise(vec3(wp.x*.16,zc*.16,uTime*.3*uFlow))*.8;wp.y+=wn*uWaveHeight;vec3 finalPos=wp*uScale;vec4 modelPosition=modelMatrix*vec4(finalPos,1.0);vec3 toP=modelPosition.xyz-uCursor;float cd=length(toP);float fall=smoothstep(uRepelRadius,0.0,cd);modelPosition.xyz+=normalize(toP+vec3(.0001))*fall*uRepelStrength*uActivity;vec4 mvPosition=viewMatrix*modelPosition;float colMix=smoothstep(-3.0,3.0,position.y+position.x*.5);vColor=mix(uColLow,uColHigh,clamp(colMix,0.0,1.0));vFade=1.0;gl_PointSize=uSize*(10.0/-mvPosition.z);gl_PointSize=max(gl_PointSize,1.5);gl_Position=projectionMatrix*mvPosition;}`;
-const fragment=`uniform float uOpacity,uBrightness,uAppear;varying float vFade;varying vec3 vColor;void main(){vec2 xy=gl_PointCoord-.5;float ll=length(xy);if(ll>.5)discard;float a=smoothstep(.5,.1,ll);gl_FragColor=vec4(vColor*uBrightness,vFade*a*uOpacity*uAppear);}`;
+  <section class="section identity" id="identity">
+    <div class="section-inner">
+      <div class="section-number">01</div>
+      <div class="section-label">WHO I AM</div>
+      <h2 class="section-heading">I'm Hariom.</h2>
+      <p class="section-body">I like taking an idea apart, understanding how it works, and building something better.</p>
+    </div>
+  </section>
 
-const finalV='varying vec2 vUv;void main(){vUv=uv;gl_Position=vec4(position,1.0);}';
-const finalF=`uniform float iTime;uniform sampler2D tDiffuse,bloomTexture,torusTexture,haloTexture;uniform vec3 uBg,uFlameA,uFlameB;uniform float uFlameAmt;varying vec2 vUv;
-vec3 warp3d(vec3 pos,float t){float curv=.8,a=1.9,b=.7;pos*=2.;pos.x+=curv*sin(t+a*pos.y)+t*b;pos.y+=curv*cos(t+a*pos.x);pos.y+=curv*sin(t+a*pos.z)+t*b;pos.z+=curv*cos(t+a*pos.y);pos.z+=curv*sin(t+a*pos.x)+t*b;pos.x+=curv*cos(t+a*pos.z);return .5+.5*cos(pos.xyz+vec3(1,2,4));}
-void main(){vec2 uv=2.*vUv-1.;vec3 w=pow(warp3d(vec3(uv.x,sin(uv.y),uv.y),iTime*1.5),vec3(1.5));vec3 flame=1.5*uFlameA*w.x;flame*=w.y;flame+=uFlameB*w.z;flame*=smoothstep(.25,1.,abs(uv.y));float md=smoothstep(-.7,1.,-uv.y*uv.x);flame*=md*md;vec3 bg=uBg*(1.-.4*length(uv));vec3 halo=texture2D(haloTexture,vUv).xyz;gl_FragColor=vec4(bg+flame*uFlameAmt+texture2D(bloomTexture,vUv).xyz+texture2D(torusTexture,vUv).xyz+texture2D(tDiffuse,vUv).xyz+halo,1.);}`;
+  <section class="section about" id="about">
+    <div class="section-inner">
+      <div class="section-label">02 / IDENTITY</div>
+      <h2 class="section-heading">Curious<br>by default.</h2>
+      <p class="section-body">I work across Python, SQL, Excel, Power BI, AI/ML and web development. I enjoy turning messy problems into structured systems and transforming ideas into working experiences.</p>
+      <div class="metadata">
+        <div><span>BASED IN</span><strong>INDIA</strong></div>
+        <div><span>EDUCATION</span><strong>BSc COMPUTER SCIENCE</strong></div>
+        <div><span>FOCUS</span><strong>DATA × AI × CREATIVE TECH</strong></div>
+      </div>
+      <div class="skills">
+        <div class="skill-group">
+          <div class="skill-title">DATA</div>
+          <div class="skill-items"><span>Python</span><span>SQL</span><span>Excel</span><span>Power BI</span><span>EDA</span><span>Data Cleaning</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-title">AI / ML</div>
+          <div class="skill-items"><span>Machine Learning</span><span>Classification</span><span>AI Concepts</span><span>Image Processing</span></div>
+        </div>
+        <div class="skill-group">
+          <div class="skill-title">DEVELOPMENT</div>
+          <div class="skill-items"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Flask</span><span>SQLite</span><span>Git / GitHub</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-const canvas=document.getElementById('scene');
-const renderer=new THREE.WebGL1Renderer({canvas,antialias:true});renderer.setPixelRatio(devicePixelRatio);renderer.setSize(innerWidth,innerHeight,false);renderer.shadowMap.enabled=true;renderer.shadowMap.type=THREE.VSMShadowMap;
-const scene=new THREE.Scene();scene.background=new THREE.Color(0x000000);scene.fog=new THREE.Fog(0x000000,0,15);
-const camera=new THREE.PerspectiveCamera(45,innerWidth/innerHeight,.1,400);camera.position.set(0,7,16);scene.add(camera);
-const LAYERS={NONE:0,TORUS_SCENE:1,BLOOM_SCENE:2,ENTIRE_SCENE:3};camera.layers.enable(LAYERS.TORUS_SCENE);camera.layers.enable(LAYERS.BLOOM_SCENE);camera.layers.enable(LAYERS.ENTIRE_SCENE);
+  <section class="section projects" id="work">
+    <div class="section-inner">
+      <div class="section-label">03 / SELECTED WORK</div>
+      <h2 class="section-heading">Ideas turned into<br><em>working products.</em></h2>
 
-const renderPass=new RenderPass(scene,camera);
-const torusComposer=new EffectComposer(renderer);torusComposer.renderToScreen=false;torusComposer.addPass(renderPass);torusComposer.addPass(new ShaderPass(GammaCorrectionShader));torusComposer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.22,.2,0));torusComposer.addPass(new ShaderPass(CopyShader));
-const bloomComposer=new EffectComposer(renderer);bloomComposer.renderToScreen=false;bloomComposer.addPass(renderPass);bloomComposer.addPass(new UnrealBloomPass(new THREE.Vector2(innerWidth,innerHeight),.4,.55,0));bloomComposer.addPass(new ShaderPass(GammaCorrectionShader));
-const finalPass=new ShaderPass(new THREE.ShaderMaterial({uniforms:{iTime:{value:0},tDiffuse:{value:null},torusTexture:{value:null},bloomTexture:{value:null},haloTexture:{value:null},uBg:{value:hexToVec3(bgColor)},uFlameA:{value:hexToVec3(flameColor)},uFlameB:{value:hexToVec3(flameColor2)},uFlameAmt:{value:flameAmt}},vertexShader:finalV,fragmentShader:finalF}));
-const finalComposer=new EffectComposer(renderer);finalComposer.addPass(renderPass);finalComposer.addPass(finalPass);finalPass.uniforms.bloomTexture.value=bloomComposer.renderTarget1.texture;finalPass.uniforms.torusTexture.value=torusComposer.renderTarget1.texture;
-const halo=new THREE.DataTexture(new Uint8Array([0,0,0,255]),1,1,THREE.RGBAFormat);halo.needsUpdate=true;finalPass.uniforms.haloTexture.value=halo;
+      <div class="project-showcase">
+        <div class="project-number">01</div>
+        <div class="project-content">
+          <div class="project-tag">FINTECH × AI × FLASK</div>
+          <h3 class="project-title">SmartLoan AI</h3>
+          <p class="project-desc">An AI-assisted loan decision platform designed to simplify eligibility, lender comparison and financial decision support.</p>
+          <div class="project-tech"><span>Flask</span><span>SQLite</span><span>Python</span><span>AI</span></div>
+          <a href="https://github.com/G1OUL/Smartloan-AI" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">View project ↗</a>
+        </div>
+      </div>
 
-const group=new THREE.Group();scene.add(group);
-const geom=new THREE.SphereGeometry(4.2,200,600);
-const uniforms={uTime:{value:0},uStream:{value:0},uAppear:{value:0},uColLow:{value:hexToVec3(colorLow)},uColHigh:{value:hexToVec3(colorHigh)},uOpacity:{value:opacity},uSize:{value:pointSize},uBrightness:{value:brightness},uWaveHeight:{value:waveHeight},uFlow:{value:flow},uScale:{value:scale},uCursor:{value:new THREE.Vector3()},uRepelRadius:{value:pointerRadius},uRepelStrength:{value:pointerStrength},uActivity:{value:0}};
-const mat=new THREE.ShaderMaterial({transparent:true,depthWrite:false,blending:THREE.AdditiveBlending,uniforms,vertexShader:vertex,fragmentShader:fragment});
-const points=new THREE.Points(geom,mat);points.frustumCulled=false;points.layers.enable(LAYERS.ENTIRE_SCENE);group.add(points);
+      <div class="project-showcase alt">
+        <div class="project-number">02</div>
+        <div class="project-content">
+          <div class="project-tag">AUTOMOTIVE × AI × CREATIVE TECH</div>
+          <h3 class="project-title">CarForge AI</h3>
+          <p class="project-desc">An interactive concept for redesigning and customizing cars using AI-assisted creative workflows.</p>
+          <div class="project-tech"><span>AI</span><span>Creative Tech</span><span>Interactive</span></div>
+          <a href="https://github.com/G1OUL/car" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">View project ↗</a>
+        </div>
+      </div>
 
-(function(){const N=Math.round(atmoCount),g=new THREE.BufferGeometry(),p=new Float32Array(N*3),s=new Float32Array(N),seed=new Float32Array(N);for(let i=0;i<N;i++){p[i*3]=2*Math.random()-1;p[i*3+1]=2*Math.random()-1;p[i*3+2]=2*Math.random()-1;s[i]=atmoSize*(.4+Math.random());seed[i]=Math.random()}g.setAttribute('position',new THREE.BufferAttribute(p,3));g.setAttribute('size',new THREE.BufferAttribute(s,1));g.setAttribute('seed',new THREE.BufferAttribute(seed,1));const m=new THREE.ShaderMaterial({transparent:true,blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,uniforms:{uTime:{value:0},uColor:{value:hexToVec3(atmoColor)},uRes:{value:new THREE.Vector2(innerWidth*devicePixelRatio,innerHeight*devicePixelRatio)}},vertexShader:`attribute float size;attribute float seed;uniform float uTime;uniform vec2 uRes;varying float vA;vec3 warp(vec3 p,float t){float c=.9,a=1.9,b=.02,s=.05;p*=2.;p.x+=c*sin(s*t+a*p.y)+t*b;p.y+=c*cos(s*t+a*p.x);p.y+=c*sin(s*t+a*p.z)+t*b;p.z+=c*cos(s*t+a*p.y);p.z+=c*sin(s*t+a*p.x)+t*b;p.x+=c*cos(s*t+a*p.z);return cos(p+vec3(1,2,4));}void main(){vec3 v=position*4.+warp(position,uTime)*1.2;vec4 mv=modelViewMatrix*vec4(v,1.);float r=length(v);float farF=1.-smoothstep(5.,6.5,r);float nearF=smoothstep(0.,.5,-mv.z);vA=farF*nearF;gl_PointSize=size*uRes.y/900./-mv.z;gl_PointSize=max(gl_PointSize,1.);gl_Position=projectionMatrix*mv;}`,fragmentShader:`uniform vec3 uColor;varying float vA;void main(){vec2 p=gl_PointCoord-.5;float l=length(p);if(l>.5)discard;float tex=smoothstep(.5,0.,l);gl_FragColor=vec4(uColor*tex,tex*vA*.6);}`});const pts=new THREE.Points(g,m);pts.frustumCulled=false;pts.layers.enable(LAYERS.ENTIRE_SCENE);pts.onBeforeRender=()=>{const t=performance.now()/1000;m.uniforms.uTime.value=t*atmoSpeed*8.;pts.position.copy(camera.position);finalPass.uniforms.iTime.value=t};scene.add(pts)})();
+      <div class="project-showcase">
+        <div class="project-number">03</div>
+        <div class="project-content">
+          <div class="project-tag">ML × NASA DATA × IMAGE PROCESSING</div>
+          <h3 class="project-title">Coastal Erosion ML</h3>
+          <p class="project-desc">A machine-learning and image-processing framework exploring coastal erosion under climate-change scenarios.</p>
+          <div class="project-tech"><span>ML</span><span>NASA Data</span><span>Image Processing</span></div>
+          <a href="https://github.com/G1OUL" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">View work ↗</a>
+        </div>
+      </div>
 
-let scrollTarget=0,scrollSmooth=0,scrollCurrent=0,stream=0;const mouseTarget={x:0,y:0},mouse={x:0,y:0};const POINTER={world:new THREE.Vector3(),activity:0,active:false,lastMove:performance.now()};const _ndc=new THREE.Vector3(),_dir=new THREE.Vector3(),_tgt=new THREE.Vector3();
-function updateScroll(){const max=document.documentElement.scrollHeight-innerHeight;scrollTarget=max>0?clamp(scrollY/max,0,1):0}
-addEventListener('scroll',updateScroll,{passive:true});
-addEventListener('mousemove',e=>{mouseTarget.x=e.clientX/innerWidth*2-1;mouseTarget.y=-((e.clientY/innerHeight)*2-1);POINTER.active=true;POINTER.lastMove=performance.now()},{passive:true});
-addEventListener('mouseout',()=>POINTER.active=false);
-function updatePointerWorld(){_tgt.set(0,0,0);if(POINTER.active){_ndc.set(mouse.x,mouse.y,.5).unproject(camera);_dir.copy(_ndc).sub(camera.position).normalize();const dn=_dir.z;if(Math.abs(dn)>1e-4){const tt=-camera.position.z/dn;if(tt>0&&Number.isFinite(tt))_tgt.copy(camera.position).addScaledVector(_dir,tt)}}POINTER.world.lerp(_tgt,.12);const idle=(performance.now()-POINTER.lastMove)/1000;POINTER.activity+=(((POINTER.active&&idle<3)?1:0)-POINTER.activity)*.06}
-const appearStart=performance.now(),panels=[...document.querySelectorAll('.panel')];
-function updateScene(scroll,m){const t=performance.now()/1000;stream+=Math.min(.05,t-(updateScene.t0||t))*flow*2*4;updateScene.t0=t;uniforms.uTime.value=t;uniforms.uStream.value=stream;uniforms.uWaveHeight.value=waveHeight*(1+scroll*scrollRise);const ea=Math.min(scroll/.35,1),e=ea*ea*(3-2*ea);camera.position.set(m.x*parallax,Lerp(camStartY,camEndY,e)+m.y*parallax*.3,Lerp(camStartZ,camEndZ,e));camera.lookAt(m.x*parallax*.5,Lerp(0,.6,e),Lerp(lookStartZ,lookEndZ,e));group.rotation.x=-tilt;group.rotation.y=0;updatePointerWorld();uniforms.uCursor.value.copy(POINTER.world);uniforms.uActivity.value=POINTER.activity;const elapsed=(performance.now()-appearStart)/1000;uniforms.uAppear.value=clamp((elapsed-.2)/1.4,0,1)}
-function render(){requestAnimationFrame(render);scrollSmooth=Lerp(scrollSmooth,scrollTarget,.10);scrollCurrent=Lerp(scrollCurrent,scrollSmooth,.06);mouse.x=Lerp(mouse.x,mouseTarget.x,.06);mouse.y=Lerp(mouse.y,mouseTarget.y,.06);updateScene(scrollCurrent,mouse);camera.layers.set(LAYERS.TORUS_SCENE);torusComposer.render();camera.layers.set(LAYERS.BLOOM_SCENE);bloomComposer.render();camera.layers.set(LAYERS.ENTIRE_SCENE);finalComposer.render();panels.forEach((p,i)=>{const start=.22+i*.105;const end=start+.24;p.classList.toggle('visible',scrollCurrent>start&&scrollCurrent<end)})}
-function resize(){const w=innerWidth,h=innerHeight,dpr=devicePixelRatio;renderer.setPixelRatio(dpr);renderer.setSize(w,h,false);camera.aspect=w/h;camera.updateProjectionMatrix();[torusComposer,bloomComposer,finalComposer].forEach(c=>{c.setPixelRatio(dpr);c.setSize(w,h)});updateScroll()}
-addEventListener('resize',resize);resize();render();
-</script>
+      <div class="project-showcase alt">
+        <div class="project-number">04</div>
+        <div class="project-content">
+          <div class="project-tag">DATA × QA × NORMALISATION</div>
+          <h3 class="project-title">MASTERDB Curation</h3>
+          <p class="project-desc">Dataset curation, normalization, canonical registration, validation and metadata preparation.</p>
+          <div class="project-tech"><span>Data</span><span>QA</span><span>Normalisation</span></div>
+          <a href="https://github.com/G1OUL/Bhiv-masterdb" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">View repository ↗</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section process" id="process">
+    <div class="section-inner">
+      <div class="section-label">04 / PROCESS</div>
+      <h2 class="section-heading">How I build.</h2>
+      <div class="process-stages">
+        <div class="process-stage"><span class="stage-num">01</span><strong>Understand</strong><p>Define the problem.</p></div>
+        <div class="process-stage"><span class="stage-num">02</span><strong>Structure</strong><p>Organize information and data.</p></div>
+        <div class="process-stage"><span class="stage-num">03</span><strong>Build</strong><p>Turn the idea into a working system.</p></div>
+        <div class="process-stage"><span class="stage-num">04</span><strong>Validate</strong><p>Test, debug and improve.</p></div>
+        <div class="process-stage"><span class="stage-num">05</span><strong>Ship</strong><p>Turn the result into something usable.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section focus" id="focus">
+    <div class="section-inner">
+      <div class="section-label">05 / CURRENT FOCUS</div>
+      <h2 class="section-heading">Currently<br>exploring</h2>
+      <div class="focus-grid">
+        <div class="focus-item"><strong>Data Analytics</strong><p>Turning data into useful decisions.</p></div>
+        <div class="focus-item"><strong>AI / Machine Learning</strong><p>Understanding intelligent systems and practical AI.</p></div>
+        <div class="focus-item"><strong>Creative Technology</strong><p>Combining design, code and interactive experiences.</p></div>
+        <div class="focus-item"><strong>Startup / Product Building</strong><p>Turning ideas into real products.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section experiments" id="experiments">
+    <div class="section-inner">
+      <div class="section-label">06 / EXPERIMENTS</div>
+      <h2 class="section-heading">Not everything<br>has to be a product.</h2>
+      <div class="experiment-tags">
+        <span class="exp-tag">AI Experiments</span>
+        <span class="exp-tag">Data Visualizations</span>
+        <span class="exp-tag">UI Experiments</span>
+        <span class="exp-tag">Three.js</span>
+        <span class="exp-tag">Automation</span>
+        <span class="exp-tag">ML Experiments</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section contact" id="contact">
+    <div class="section-inner">
+      <h2 class="contact-heading">Have an idea?</h2>
+      <h2 class="contact-subheading">Let's build it.</h2>
+      <div class="contact-actions">
+        <a href="mailto:cshariomupadhyay@gmail.com" class="btn btn-primary magnetic">Start a conversation</a>
+        <a href="https://github.com/G1OUL" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">GitHub ↗</a>
+        <a href="https://www.linkedin.com/in/Hariom-Upadhyay-b07848317" target="_blank" rel="noreferrer" class="btn btn-ghost magnetic">LinkedIn ↗</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>© 2026 Hariom Upadhyay</span>
+  <span>Built with curiosity.</span>
+  <span>@G1OUL</span>
+</footer>
+
+<script type="module" src="script.js"></script>
 </body>
 </html>
