@@ -8,16 +8,16 @@ const THEMES = {
   dark: {
     sceneBg: 0x050706,
     fogColor: '#050706',
-    terrainLow: '#0B100D',
-    terrainHigh: '#1A3328',
+    terrainLow: '#0A1F14',
+    terrainHigh: '#1A5C3A',
     wireColor: '#5CFF9A',
     particleColor: '#B7FFCE'
   },
   light: {
     sceneBg: 0xF5F3EF,
     fogColor: '#F5F3EF',
-    terrainLow: '#EDEAE3',
-    terrainHigh: '#C8C4B8',
+    terrainLow: '#D8D4C8',
+    terrainHigh: '#8AB89A',
     wireColor: '#0A7A3E',
     particleColor: '#0A9D5E'
   }
@@ -38,6 +38,7 @@ function applyThemeToScene(t) {
   if (terrainUniforms) {
     terrainUniforms.uColorLow.value.copy(hexToVec3(c.terrainLow));
     terrainUniforms.uColorHigh.value.copy(hexToVec3(c.terrainHigh));
+    terrainUniforms.uAccentColor.value.copy(hexToVec3(c.wireColor));
     terrainUniforms.uFogColor.value.copy(hexToVec3(c.fogColor));
   }
   if (wireUniforms) {
@@ -132,14 +133,22 @@ void main() {
 const terrainFragment = `
 uniform vec3 uColorLow;
 uniform vec3 uColorHigh;
+uniform vec3 uAccentColor;
 uniform vec3 uFogColor;
 uniform float uFogDensity;
 uniform float uOpacity;
+uniform float uTime;
 varying float vElevation;
 varying float vFogDepth;
 void main() {
   float mixFactor = smoothstep(-3.0, 5.0, vElevation);
   vec3 color = mix(uColorLow, uColorHigh, mixFactor);
+  // Glow along ridges
+  float ridgeGlow = smoothstep(2.0, 5.0, vElevation);
+  color += uAccentColor * ridgeGlow * 0.4;
+  // Subtle pulse on high points
+  float pulse = 0.5 + 0.5 * sin(uTime * 0.5 + vElevation * 2.0);
+  color += uAccentColor * ridgeGlow * pulse * 0.15;
   float fogFactor = 1.0 - exp(-uFogDensity * uFogDensity * vFogDepth * vFogDepth);
   fogFactor = clamp(fogFactor, 0.0, 1.0);
   color = mix(color, uFogColor, fogFactor);
@@ -205,8 +214,8 @@ const cameraKeys = [
 
 const uniformKeys = {
   uWaveHeight: [
-    { p: 0.0, v: 3.0 }, { p: 0.25, v: 2.0 }, { p: 0.42, v: 4.0 },
-    { p: 0.60, v: 2.5 }, { p: 0.75, v: 1.5 }, { p: 1.0, v: 0.5 }
+    { p: 0.0, v: 4.0 }, { p: 0.25, v: 3.0 }, { p: 0.42, v: 5.0 },
+    { p: 0.60, v: 3.5 }, { p: 0.75, v: 2.5 }, { p: 1.0, v: 1.0 }
   ],
   uFogDensity: [
     { p: 0.0, v: 0.012 }, { p: 0.25, v: 0.015 }, { p: 0.42, v: 0.018 },
@@ -216,7 +225,7 @@ const uniformKeys = {
     { p: 0.0, v: 0.9 }, { p: 0.42, v: 0.85 }, { p: 0.75, v: 0.6 }, { p: 1.0, v: 0.15 }
   ],
   uWireOpacity: [
-    { p: 0.0, v: 0.15 }, { p: 0.42, v: 0.18 }, { p: 0.75, v: 0.08 }, { p: 1.0, v: 0.02 }
+    { p: 0.0, v: 0.35 }, { p: 0.42, v: 0.4 }, { p: 0.75, v: 0.2 }, { p: 1.0, v: 0.05 }
   ],
   uParticleOpacity: [
     { p: 0.0, v: 0.6 }, { p: 0.25, v: 0.8 }, { p: 0.42, v: 0.7 },
@@ -245,7 +254,7 @@ function initThree() {
   camera.lookAt(0, 0, 0);
 
   const dpr = IS_MOBILE ? Math.min(devicePixelRatio, 1.5) : Math.min(devicePixelRatio, 2);
-  renderer = new THREE.WebGL1Renderer({ canvas, antialias: !IS_MOBILE, powerPreference: 'high-performance' });
+  renderer = new THREE.WebGLRenderer({ canvas, antialias: !IS_MOBILE, powerPreference: 'high-performance' });
   renderer.setPixelRatio(dpr);
   renderer.setSize(innerWidth, innerHeight, false);
 
@@ -268,6 +277,7 @@ function createTerrain() {
     uWaveHeight: { value: 3.0 },
     uColorLow: { value: hexToVec3(theme.terrainLow) },
     uColorHigh: { value: hexToVec3(theme.terrainHigh) },
+    uAccentColor: { value: hexToVec3(theme.wireColor) },
     uFogColor: { value: hexToVec3(theme.fogColor) },
     uFogDensity: { value: 0.015 },
     uOpacity: { value: 0.9 }
@@ -309,7 +319,7 @@ function createTerrain() {
 }
 
 function createParticles() {
-  const count = IS_MOBILE ? 500 : 2000;
+  const count = IS_MOBILE ? 600 : 3000;
   const geo = new THREE.BufferGeometry();
   const positions = new Float32Array(count * 3);
   const sizes = new Float32Array(count);
@@ -356,7 +366,7 @@ function createPostProcessing() {
   composer.addPass(new RenderPass(scene, camera));
   const bloom = new UnrealBloomPass(
     new THREE.Vector2(innerWidth, innerHeight),
-    0.5, 0.4, 0.85
+    0.8, 0.5, 0.75
   );
   composer.addPass(bloom);
 }
@@ -381,14 +391,15 @@ function updateScene() {
   const pos = interpolateKey(cameraKeys, smoothScroll, 'pos');
   const look = interpolateKey(cameraKeys, smoothScroll, 'look');
   const parallax = IS_TOUCH ? 0 : 2;
+  const sway = Math.sin(t * 0.15) * 1.5;
 
   camera.position.set(
-    pos[0] + smoothMouseX * parallax,
-    pos[1] + smoothMouseY * parallax,
+    pos[0] + smoothMouseX * parallax + sway,
+    pos[1] + smoothMouseY * parallax + Math.cos(t * 0.1) * 1.0,
     pos[2]
   );
   camera.lookAt(
-    look[0] + smoothMouseX * parallax * 0.5,
+    look[0] + smoothMouseX * parallax * 0.5 + sway * 0.3,
     look[1],
     look[2]
   );
